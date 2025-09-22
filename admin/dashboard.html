@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - EduActivities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        admin: '#dc2626',
+                        adminLight: '#fef2f2',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Admin Sidebar -->
+        <aside id="sidebar" class="bg-white w-64 min-h-screen shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 z-30">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-admin to-red-700">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-admin text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-white">EduActivities</h1>
+                        <p class="text-xs text-red-100">Quản trị viên</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-white hover:text-red-200" aria-label="Close sidebar" title="Close sidebar">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Admin Info -->
+            <div class="p-4 border-b border-gray-200 bg-adminLight">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-admin to-red-700 rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-lg">GV</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">Trần Thị B</h3>
+                        <p class="text-sm text-admin">Admin #001</p>
+                        <p class="text-xs text-gray-500">Quản trị viên hệ thống</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" id="nav-dashboard" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html" id="nav-users" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-users"></i>
+                            <span>Quản lý người dùng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="activities.html" id="nav-activities" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Quản lý hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="nav-categories" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-tags"></i>
+                            <span>Quản lý danh mục</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Admin Tools Section -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Công cụ quản trị</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Báo cáo & Thống kê</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-download"></i>
+                                <span>Xuất dữ liệu</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-cogs"></i>
+                                <span>Cấu hình hệ thống</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Bảo mật</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-history"></i>
+                                <span>Nhật ký hệ thống</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Hỗ trợ</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Hướng dẫn sử dụng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-headset"></i>
+                                <span>Hỗ trợ kỹ thuật</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="../login.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition duration-200 w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Admin Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <!-- Left side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Mobile menu button -->
+                        <button id="menuToggle" class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Open menu" title="Open menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Admin Badge -->
+                        <div class="hidden sm:flex items-center space-x-2 bg-adminLight px-3 py-1 rounded-full">
+                            <i class="fas fa-shield-alt text-admin text-sm"></i>
+                            <span class="text-admin text-sm font-medium">Quản trị viên</span>
+                        </div>
+
+                        <!-- Breadcrumb -->
+                        <nav class="hidden md:flex" aria-label="Breadcrumb">
+                            <ol class="flex items-center space-x-2">
+                                <li>
+                                    <a href="dashboard.html" class="text-gray-500 hover:text-gray-700" aria-label="Admin Home" title="Go to Admin Dashboard">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-sm"></i>
+                                    <span id="currentPage" class="text-gray-700 font-medium">Dashboard</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Center - Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none transition duration-300" placeholder="Tìm kiếm người dùng, hoạt động...">
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search button for mobile -->
+                        <button class="md:hidden text-gray-500 hover:text-gray-700" aria-label="Search" title="Search">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+
+                        <!-- Quick Actions -->
+                        <div class="hidden lg:flex items-center space-x-2">
+                            <button class="text-gray-500 hover:text-admin transition duration-200" title="Thêm người dùng mới">
+                                <i class="fas fa-user-plus text-lg"></i>
+                            </button>
+                            <button class="text-gray-500 hover:text-admin transition duration-200" title="Thêm hoạt động mới">
+                                <i class="fas fa-plus text-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- System Status -->
+                        <div class="hidden lg:flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span class="text-sm text-gray-600">Hệ thống hoạt động</span>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="relative">
+                            <button class="text-gray-500 hover:text-gray-700 relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-admin text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">5</span>
+                            </button>
+                        </div>
+
+                        <!-- Admin User Menu -->
+                        <div class="relative">
+                            <button id="userMenuToggle" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <div class="w-8 h-8 bg-gradient-to-r from-admin to-red-700 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">GV</span>
+                                </div>
+                                <span class="hidden sm:block">Trần Thị B</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+
+                            <!-- Admin Dropdown menu -->
+                            <div id="userDropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-10">
+                                <div class="py-2">
+                                    <div class="px-4 py-2 border-b border-gray-200">
+                                        <p class="text-sm text-gray-600">Đăng nhập với quyền</p>
+                                        <p class="text-sm font-medium text-admin">Quản trị viên</p>
+                                    </div>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user-cog mr-2"></i>
+                                        Hồ sơ quản trị
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-cogs mr-2"></i>
+                                        Cài đặt hệ thống
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Quyền truy cập
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../me/dashboard.html" class="block px-4 py-2 text-primary hover:bg-blue-50">
+                                        <i class="fas fa-user mr-2"></i>
+                                        Chế độ sinh viên
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../login.html" class="block px-4 py-2 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Page Title -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h1 id="pageTitle" class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                                <p id="pageDescription" class="text-gray-600 mt-2">Tổng quan quản trị hệ thống EduActivities</p>
+                            </div>
+                            <!-- Quick Actions for current page -->
+                            <div id="pageActions" class="flex space-x-2">
+                                <button class="bg-admin text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Thêm mới
+                                </button>
+                                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-200">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Xuất dữ liệu
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content will be inserted here by individual pages -->
+                    <div id="pageContent">
+                        <!-- Admin Dashboard specific content -->
+                        <!-- System Overview Stats -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Total Users -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Tổng số người dùng</p>
+                                        <p class="text-2xl font-bold text-gray-800">1,247</p>
+                                        <p class="text-green-600 text-sm">+12% so với tháng trước</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-blue-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-users text-blue-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Activities -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Tổng số hoạt động</p>
+                                        <p class="text-2xl font-bold text-gray-800">89</p>
+                                        <p class="text-green-600 text-sm">+5 hoạt động mới</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-calendar-alt text-green-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Active Sessions -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Phiên hoạt động</p>
+                                        <p class="text-2xl font-bold text-gray-800">342</p>
+                                        <p class="text-blue-600 text-sm">Đang trực tuyến</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-purple-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-globe text-purple-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- System Status -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Tình trạng hệ thống</p>
+                                        <p class="text-2xl font-bold text-green-600">Ổn định</p>
+                                        <p class="text-gray-600 text-sm">99.9% uptime</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-server text-green-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Management Overview -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                            <!-- Recent Activities -->
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                                <div class="p-6 border-b border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-800">Hoạt động gần đây</h3>
+                                        <a href="activities.html" class="text-admin hover:text-red-700 text-sm">Xem tất cả</a>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="space-y-4">
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-green-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-plus text-green-500 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Tạo hoạt động "Workshop AI"</p>
+                                                <p class="text-gray-500 text-sm">bởi Trần Thị B • 30 phút trước</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-blue-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-edit text-blue-500 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Cập nhật hoạt động "Hội thảo Khởi nghiệp"</p>
+                                                <p class="text-gray-500 text-sm">bởi Nguyễn Văn C • 1 giờ trước</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-yellow-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-user-plus text-yellow-500 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Thêm 15 sinh viên mới</p>
+                                                <p class="text-gray-500 text-sm">Import từ file Excel • 2 giờ trước</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User Management Overview -->
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                                <div class="p-6 border-b border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-800">Quản lý người dùng</h3>
+                                        <a href="users.html" class="text-admin hover:text-red-700 text-sm">Xem tất cả</a>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div>
+                                                <p class="font-medium text-gray-800">Sinh viên đang hoạt động</p>
+                                                <p class="text-sm text-gray-500">1,156 người dùng</p>
+                                            </div>
+                                            <div class="text-2xl font-bold text-green-600">92.7%</div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div>
+                                                <p class="font-medium text-gray-800">Đăng ký mới trong tháng</p>
+                                                <p class="text-sm text-gray-500">91 người dùng</p>
+                                            </div>
+                                            <div class="text-2xl font-bold text-blue-600">+15%</div>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div>
+                                                <p class="font-medium text-gray-800">Cần xem xét</p>
+                                                <p class="text-sm text-gray-500">12 tài khoản</p>
+                                            </div>
+                                            <div class="text-2xl font-bold text-yellow-600">!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions Panel -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                            <div class="p-6 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-800">Thao tác nhanh</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <button class="flex flex-col items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-200">
+                                        <i class="fas fa-user-plus text-blue-500 text-2xl mb-2"></i>
+                                        <span class="text-blue-700 font-medium">Thêm người dùng</span>
+                                    </button>
+                                    <button class="flex flex-col items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition duration-200">
+                                        <i class="fas fa-calendar-plus text-green-500 text-2xl mb-2"></i>
+                                        <span class="text-green-700 font-medium">Tạo hoạt động</span>
+                                    </button>
+                                    <button class="flex flex-col items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition duration-200">
+                                        <i class="fas fa-chart-bar text-purple-500 text-2xl mb-2"></i>
+                                        <span class="text-purple-700 font-medium">Xem báo cáo</span>
+                                    </button>
+                                    <button class="flex flex-col items-center p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition duration-200">
+                                        <i class="fas fa-cogs text-yellow-500 text-2xl mb-2"></i>
+                                        <span class="text-yellow-700 font-medium">Cài đặt</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        overlay.addEventListener('click', closeSidebarFn);
+
+        // User dropdown toggle
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Active navigation highlighting for admin
+        function setActiveNav() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('bg-admin', 'text-white');
+                link.classList.add('text-gray-700');
+            });
+
+            // Set active based on current page
+            if (currentPath.includes('dashboard.html') || currentPath.endsWith('/admin/')) {
+                document.getElementById('nav-dashboard').classList.add('bg-admin', 'text-white');
+                document.getElementById('nav-dashboard').classList.remove('text-gray-700');
+            } else if (currentPath.includes('users.html')) {
+                document.getElementById('nav-users').classList.add('bg-admin', 'text-white');
+                document.getElementById('nav-users').classList.remove('text-gray-700');
+            } else if (currentPath.includes('activities.html')) {
+                document.getElementById('nav-activities').classList.add('bg-admin', 'text-white');
+                document.getElementById('nav-activities').classList.remove('text-gray-700');
+            } else if (currentPath.includes('categories.html')) {
+                document.getElementById('nav-categories').classList.add('bg-admin', 'text-white');
+                document.getElementById('nav-categories').classList.remove('text-gray-700');
+            }
+        }
+
+        // Update page info function for admin pages
+        function updatePageInfo(title, description, breadcrumb, actions) {
+            document.getElementById('pageTitle').textContent = title;
+            document.getElementById('pageDescription').textContent = description;
+            document.getElementById('currentPage').textContent = breadcrumb || title;
+            document.title = title + ' - Admin - EduActivities';
+            
+            // Update page actions if provided
+            if (actions) {
+                document.getElementById('pageActions').innerHTML = actions;
+            }
+        }
+
+        // Common function to clear and set page content
+        function setPageContent(content) {
+            document.getElementById('pageContent').innerHTML = content;
+        }
+
+        // Admin specific functions
+        function showSystemAlert(message, type = 'info') {
+            // Implementation for system alerts
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+
+        function refreshDashboardStats() {
+            // Implementation for refreshing dashboard statistics
+            console.log('Refreshing dashboard stats...');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNav();
+            
+            // Auto-close sidebar on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    closeSidebarFn();
+                }
+            });
+
+            // Refresh stats every 5 minutes
+            setInterval(refreshDashboardStats, 5 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>
