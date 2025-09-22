@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý hoạt động - EduActivities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-white w-64 min-h-screen shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 z-30">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">EduActivities</h1>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700" aria-label="Close sidebar" title="Close sidebar">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-lg">NV</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">Nguyễn Văn A</h3>
+                        <p class="text-sm text-gray-500">SV001234567</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" id="nav-dashboard" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="activities.html" id="nav-activities" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg bg-primary text-white transition duration-200">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="nav-categories" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-tags"></i>
+                            <span>Danh mục</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" id="nav-profile" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Hồ sơ cá nhân</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Secondary Menu -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Khác</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-bell"></i>
+                                <span>Thông báo</span>
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-auto">3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-cog"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Trợ giúp</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="../login.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition duration-200 w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <!-- Left side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Mobile menu button -->
+                        <button id="menuToggle" class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Open menu" title="Open menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Breadcrumb -->
+                        <nav class="hidden sm:flex" aria-label="Breadcrumb">
+                            <ol class="flex items-center space-x-2">
+                                <li>
+                                    <a href="dashboard.html" class="text-gray-500 hover:text-gray-700" aria-label="Home" title="Go to Dashboard">
+                                        <i class="fas fa-home"></i>
+                                    </a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-sm"></i>
+                                    <span id="currentPage" class="text-gray-700 font-medium">Hoạt động</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Center - Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition duration-300" placeholder="Tìm kiếm hoạt động...">
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search button for mobile -->
+                        <button class="md:hidden text-gray-500 hover:text-gray-700" aria-label="Search" title="Search">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+
+                        <!-- Notifications -->
+                        <div class="relative">
+                            <button class="text-gray-500 hover:text-gray-700 relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">3</span>
+                            </button>
+                        </div>
+
+                        <!-- User Menu -->
+                        <div class="relative">
+                            <button id="userMenuToggle" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <div class="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">NV</span>
+                                </div>
+                                <span class="hidden sm:block">Nguyễn Văn A</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-10">
+                                <div class="py-2">
+                                    <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user-circle mr-2"></i>
+                                        Hồ sơ cá nhân
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-cog mr-2"></i>
+                                        Cài đặt
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../login.html" class="block px-4 py-2 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Page Title and Add Button -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+                        <div>
+                            <h1 id="pageTitle" class="text-3xl font-bold text-gray-800">Quản lý hoạt động</h1>
+                            <p id="pageDescription" class="text-gray-600 mt-2">Tạo và quản lý các hoạt động ngoại khóa của bạn</p>
+                        </div>
+                        <div class="mt-4 sm:mt-0">
+                            <button id="createActivityBtn" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-200 font-medium inline-flex items-center">
+                                <i class="fas fa-plus mr-2"></i>
+                                Tạo hoạt động mới
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+                        <div class="border-b border-gray-200">
+                            <nav class="flex space-x-8 px-6" aria-label="Tabs">
+                                <button class="tab-button py-4 text-sm font-medium border-b-2 border-primary text-primary" data-tab="my-activities">
+                                    <i class="fas fa-user mr-2"></i>
+                                    Hoạt động của tôi
+                                    <span class="bg-primary text-white text-xs px-2 py-1 rounded-full ml-2" id="myActivitiesCount">3</span>
+                                </button>
+                                <button class="tab-button py-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="all-activities">
+                                    <i class="fas fa-globe mr-2"></i>
+                                    Tất cả hoạt động
+                                    <span class="bg-gray-500 text-white text-xs px-2 py-1 rounded-full ml-2" id="allActivitiesCount">12</span>
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div id="pageContent">
+                        <!-- My Activities Tab -->
+                        <div id="my-activities" class="tab-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="myActivitiesGrid">
+                                <!-- User's Activity Card 1 -->
+                                <div class="activity-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-300" data-activity-id="user-1">
+                                    <div class="relative">
+                                        <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                                            <i class="fas fa-code text-white text-4xl"></i>
+                                        </div>
+                                        <div class="absolute top-4 right-4">
+                                            <span class="bg-white bg-opacity-90 text-blue-600 text-xs font-semibold px-2 py-1 rounded-full">Workshop</span>
+                                        </div>
+                                        <div class="absolute top-4 left-4">
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full">
+                                                <i class="fas fa-crown mr-1"></i>Của tôi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <h3 class="text-lg font-semibold text-gray-800 line-clamp-2">Workshop lập trình Python cơ bản</h3>
+                                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap ml-2">Đang mở ĐK</span>
+                                        </div>
+                                        
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Học Python từ cơ bản đến nâng cao với các dự án thực tế.</p>
+                                        
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-calendar mr-2 w-4"></i>
+                                                <span>28/09/2025 - 14:00</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                                                <span>Phòng Lab 201</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-users mr-2 w-4"></i>
+                                                <span>15/30 người tham gia</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-star mr-2 w-4"></i>
+                                                <span>8 điểm tích lũy</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium" onclick="editActivity('user-1')">
+                                                <i class="fas fa-edit mr-2"></i>
+                                                Chỉnh sửa
+                                            </button>
+                                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200" onclick="viewParticipants('user-1')" aria-label="Xem danh sách tham gia" title="Xem danh sách tham gia">
+                                                <i class="fas fa-users text-gray-600"></i>
+                                            </button>
+                                            <button class="px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition duration-200" onclick="deleteActivity('user-1')" aria-label="Xóa hoạt động" title="Xóa hoạt động">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- User's Activity Card 2 -->
+                                <div class="activity-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-300" data-activity-id="user-2">
+                                    <div class="relative">
+                                        <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                                            <i class="fas fa-leaf text-white text-4xl"></i>
+                                        </div>
+                                        <div class="absolute top-4 right-4">
+                                            <span class="bg-white bg-opacity-90 text-green-600 text-xs font-semibold px-2 py-1 rounded-full">Tình nguyện</span>
+                                        </div>
+                                        <div class="absolute top-4 left-4">
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full">
+                                                <i class="fas fa-crown mr-1"></i>Của tôi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <h3 class="text-lg font-semibold text-gray-800 line-clamp-2">Chiến dịch trồng cây xanh</h3>
+                                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap ml-2">Đang diễn ra</span>
+                                        </div>
+                                        
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Tham gia trồng cây và bảo vệ môi trường xung quanh trường.</p>
+                                        
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-calendar mr-2 w-4"></i>
+                                                <span>01/10 - 15/10/2025</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                                                <span>Khuôn viên trường</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-users mr-2 w-4"></i>
+                                                <span>25/50 tình nguyện viên</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-star mr-2 w-4"></i>
+                                                <span>12 điểm tích lũy</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium" onclick="editActivity('user-2')">
+                                                <i class="fas fa-edit mr-2"></i>
+                                                Chỉnh sửa
+                                            </button>
+                                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200" onclick="viewParticipants('user-2')" aria-label="Xem danh sách tham gia" title="Xem danh sách tham gia">
+                                                <i class="fas fa-users text-gray-600"></i>
+                                            </button>
+                                            <button class="px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition duration-200" onclick="deleteActivity('user-2')" aria-label="Xóa hoạt động" title="Xóa hoạt động">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- User's Activity Card 3 -->
+                                <div class="activity-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-300" data-activity-id="user-3">
+                                    <div class="relative">
+                                        <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                                            <i class="fas fa-music text-white text-4xl"></i>
+                                        </div>
+                                        <div class="absolute top-4 right-4">
+                                            <span class="bg-white bg-opacity-90 text-purple-600 text-xs font-semibold px-2 py-1 rounded-full">Văn hóa</span>
+                                        </div>
+                                        <div class="absolute top-4 left-4">
+                                            <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full">
+                                                <i class="fas fa-crown mr-1"></i>Của tôi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-6">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <h3 class="text-lg font-semibold text-gray-800 line-clamp-2">Đêm nhạc Acoustic sinh viên</h3>
+                                            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full whitespace-nowrap ml-2">Sắp diễn ra</span>
+                                        </div>
+                                        
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Đêm nhạc dành cho các sinh viên yêu thích âm nhạc acoustic.</p>
+                                        
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-calendar mr-2 w-4"></i>
+                                                <span>05/10/2025 - 19:30</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                                                <span>Sân khấu ngoài trời</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-users mr-2 w-4"></i>
+                                                <span>45/100 người tham gia</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-star mr-2 w-4"></i>
+                                                <span>5 điểm tích lũy</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex gap-2">
+                                            <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium" onclick="editActivity('user-3')">
+                                                <i class="fas fa-edit mr-2"></i>
+                                                Chỉnh sửa
+                                            </button>
+                                            <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200" onclick="viewParticipants('user-3')" aria-label="Xem danh sách tham gia" title="Xem danh sách tham gia">
+                                                <i class="fas fa-users text-gray-600"></i>
+                                            </button>
+                                            <button class="px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition duration-200" onclick="deleteActivity('user-3')" aria-label="Xóa hoạt động" title="Xóa hoạt động">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Empty State for My Activities -->
+                            <div id="myActivitiesEmpty" class="text-center py-16 hidden">
+                                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-plus text-gray-400 text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">Chưa có hoạt động nào</h3>
+                                <p class="text-gray-600 mb-6">Bạn chưa tạo hoạt động ngoại khóa nào. Hãy tạo hoạt động đầu tiên!</p>
+                                <button onclick="openCreateModal()" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-200 font-medium inline-flex items-center">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Tạo hoạt động đầu tiên
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- All Activities Tab -->
+                        <div id="all-activities" class="tab-content hidden">
+                            <div class="mb-6">
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                                        <!-- Left side filters -->
+                                        <div class="flex flex-col sm:flex-row gap-4">
+                                            <!-- Category Filter -->
+                                            <div class="min-w-48">
+                                                <select id="categoryFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" aria-label="Lọc theo danh mục" title="Lọc theo danh mục">
+                                                    <option value="">Tất cả danh mục</option>
+                                                    <option value="workshop">Workshop</option>
+                                                    <option value="seminar">Hội thảo</option>
+                                                    <option value="competition">Cuộc thi</option>
+                                                    <option value="sports">Thể thao</option>
+                                                    <option value="volunteer">Tình nguyện</option>
+                                                    <option value="cultural">Văn hóa</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Status Filter -->
+                                            <div class="min-w-48">
+                                                <select id="statusFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" aria-label="Lọc theo trạng thái" title="Lọc theo trạng thái">
+                                                    <option value="">Tất cả trạng thái</option>
+                                                    <option value="upcoming">Sắp diễn ra</option>
+                                                    <option value="ongoing">Đang diễn ra</option>
+                                                    <option value="registration">Đang mở đăng ký</option>
+                                                    <option value="full">Đã đầy</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Right side actions -->
+                                        <div class="flex gap-3">
+                                            <button id="resetFilters" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">
+                                                <i class="fas fa-undo mr-2"></i>
+                                                Đặt lại
+                                            </button>
+                                            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition duration-200">
+                                                <i class="fas fa-filter mr-2"></i>
+                                                Lọc
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="allActivitiesGrid">
+                                <!-- All activities will be loaded here -->
+                                <div class="text-center py-16 col-span-full">
+                                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <i class="fas fa-globe text-gray-400 text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Đang tải hoạt động...</h3>
+                                    <p class="text-gray-600">Vui lòng chờ trong giây lát.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Create/Edit Activity Modal -->
+    <div id="activityModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 id="modalTitle" class="text-xl font-semibold text-gray-800">Tạo hoạt động mới</h3>
+                        <button id="closeModal" class="text-gray-400 hover:text-gray-600" aria-label="Đóng modal" title="Đóng modal">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <form id="activityForm" class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Activity Name -->
+                        <div class="md:col-span-2">
+                            <label for="activityName" class="block text-sm font-medium text-gray-700 mb-2">Tên hoạt động *</label>
+                            <input type="text" id="activityName" name="activityName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Nhập tên hoạt động">
+                        </div>
+
+                        <!-- Category -->
+                        <div>
+                            <label for="activityCategory" class="block text-sm font-medium text-gray-700 mb-2">Danh mục *</label>
+                            <select id="activityCategory" name="activityCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                                <option value="">Chọn danh mục</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="seminar">Hội thảo</option>
+                                <option value="competition">Cuộc thi</option>
+                                <option value="sports">Thể thao</option>
+                                <option value="volunteer">Tình nguyện</option>
+                                <option value="cultural">Văn hóa</option>
+                            </select>
+                        </div>
+
+                        <!-- Points -->
+                        <div>
+                            <label for="activityPoints" class="block text-sm font-medium text-gray-700 mb-2">Điểm tích lũy *</label>
+                            <input type="number" id="activityPoints" name="activityPoints" required min="1" max="50" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="5">
+                        </div>
+
+                        <!-- Start Date -->
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu *</label>
+                            <input type="datetime-local" id="startDate" name="startDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                        </div>
+
+                        <!-- End Date -->
+                        <div>
+                            <label for="endDate" class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc</label>
+                            <input type="datetime-local" id="endDate" name="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                        </div>
+
+                        <!-- Location -->
+                        <div class="md:col-span-2">
+                            <label for="activityLocation" class="block text-sm font-medium text-gray-700 mb-2">Địa điểm *</label>
+                            <input type="text" id="activityLocation" name="activityLocation" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Nhập địa điểm tổ chức">
+                        </div>
+
+                        <!-- Max Participants -->
+                        <div>
+                            <label for="maxParticipants" class="block text-sm font-medium text-gray-700 mb-2">Số lượng tối đa *</label>
+                            <input type="number" id="maxParticipants" name="maxParticipants" required min="1" max="1000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="30">
+                        </div>
+
+                        <!-- Registration Deadline -->
+                        <div>
+                            <label for="registrationDeadline" class="block text-sm font-medium text-gray-700 mb-2">Hạn đăng ký</label>
+                            <input type="datetime-local" id="registrationDeadline" name="registrationDeadline" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="md:col-span-2">
+                            <label for="activityDescription" class="block text-sm font-medium text-gray-700 mb-2">Mô tả hoạt động *</label>
+                            <textarea id="activityDescription" name="activityDescription" required rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Mô tả chi tiết về hoạt động..."></textarea>
+                        </div>
+
+                        <!-- Requirements -->
+                        <div class="md:col-span-2">
+                            <label for="activityRequirements" class="block text-sm font-medium text-gray-700 mb-2">Yêu cầu tham gia</label>
+                            <textarea id="activityRequirements" name="activityRequirements" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Các yêu cầu hoặc điều kiện để tham gia..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+                        <button type="button" id="cancelModal" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-200">
+                            Hủy
+                        </button>
+                        <button type="submit" id="saveActivity" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition duration-200">
+                            <i class="fas fa-save mr-2"></i>
+                            Lưu hoạt động
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        overlay.addEventListener('click', closeSidebarFn);
+
+        // User dropdown toggle
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Tab switching
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function switchTab(tabName) {
+            // Update buttons
+            tabButtons.forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.remove('border-transparent', 'text-gray-500');
+                    btn.classList.add('border-primary', 'text-primary');
+                } else {
+                    btn.classList.remove('border-primary', 'text-primary');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                }
+            });
+
+            // Update content
+            tabContents.forEach(content => {
+                if (content.id === tabName) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            // Load content for all activities tab
+            if (tabName === 'all-activities') {
+                loadAllActivities();
+            }
+        }
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+
+        // Modal handling
+        const activityModal = document.getElementById('activityModal');
+        const createActivityBtn = document.getElementById('createActivityBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelModal = document.getElementById('cancelModal');
+        const activityForm = document.getElementById('activityForm');
+        const modalTitle = document.getElementById('modalTitle');
+
+        let editingActivityId = null;
+
+        function openCreateModal() {
+            editingActivityId = null;
+            modalTitle.textContent = 'Tạo hoạt động mới';
+            activityForm.reset();
+            activityModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function openEditModal(activityId) {
+            editingActivityId = activityId;
+            modalTitle.textContent = 'Chỉnh sửa hoạt động';
+            
+            // Load activity data (in a real app, this would fetch from backend)
+            loadActivityData(activityId);
+            
+            activityModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModalFn() {
+            activityModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            editingActivityId = null;
+        }
+
+        createActivityBtn.addEventListener('click', openCreateModal);
+        closeModal.addEventListener('click', closeModalFn);
+        cancelModal.addEventListener('click', closeModalFn);
+
+        // Activity form submission
+        activityForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(activityForm);
+            const activityData = Object.fromEntries(formData.entries());
+            
+            if (editingActivityId) {
+                updateActivity(editingActivityId, activityData);
+            } else {
+                createActivity(activityData);
+            }
+            
+            closeModalFn();
+        });
+
+        // Activity CRUD functions
+        function createActivity(activityData) {
+            // In a real app, this would send data to backend
+            console.log('Creating activity:', activityData);
+            showNotification('Hoạt động đã được tạo thành công!', 'success');
+            
+            // Update UI
+            updateMyActivitiesCount(1);
+            
+            // Add new activity card to the grid
+            addActivityCard(activityData);
+        }
+
+        function updateActivity(activityId, activityData) {
+            // In a real app, this would send update to backend
+            console.log('Updating activity:', activityId, activityData);
+            showNotification('Hoạt động đã được cập nhật thành công!', 'success');
+            
+            // Update the activity card
+            updateActivityCard(activityId, activityData);
+        }
+
+        function deleteActivity(activityId) {
+            if (confirm('Bạn có chắc chắn muốn xóa hoạt động này?')) {
+                // In a real app, this would send delete request to backend
+                console.log('Deleting activity:', activityId);
+                
+                // Remove from UI
+                const activityCard = document.querySelector(`[data-activity-id="${activityId}"]`);
+                if (activityCard) {
+                    activityCard.remove();
+                    updateMyActivitiesCount(-1);
+                    showNotification('Hoạt động đã được xóa thành công!', 'success');
+                    
+                    // Check if empty
+                    checkMyActivitiesEmpty();
+                }
+            }
+        }
+
+        function editActivity(activityId) {
+            openEditModal(activityId);
+        }
+
+        function viewParticipants(activityId) {
+            showNotification('Tính năng xem danh sách tham gia sẽ được phát triển!', 'info');
+        }
+
+        function loadActivityData(activityId) {
+            // In a real app, this would fetch from backend
+            // For demo, we'll use sample data
+            const sampleData = {
+                'user-1': {
+                    activityName: 'Workshop lập trình Python cơ bản',
+                    activityCategory: 'workshop',
+                    activityPoints: 8,
+                    startDate: '2025-09-28T14:00',
+                    endDate: '2025-09-28T17:00',
+                    activityLocation: 'Phòng Lab 201',
+                    maxParticipants: 30,
+                    registrationDeadline: '2025-09-26T23:59',
+                    activityDescription: 'Học Python từ cơ bản đến nâng cao với các dự án thực tế.',
+                    activityRequirements: 'Có laptop và kiến thức cơ bản về máy tính'
+                }
+            };
+            
+            const data = sampleData[activityId];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.value = data[key];
+                    }
+                });
+            }
+        }
+
+        function loadAllActivities() {
+            const grid = document.getElementById('allActivitiesGrid');
+            // Simulate loading
+            setTimeout(() => {
+                grid.innerHTML = `
+                    <div class="text-center py-16 col-span-full">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-calendar-alt text-gray-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Chưa có hoạt động chung nào</h3>
+                        <p class="text-gray-600">Các hoạt động từ sinh viên khác sẽ hiển thị ở đây.</p>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        function updateMyActivitiesCount(change) {
+            const countElement = document.getElementById('myActivitiesCount');
+            const currentCount = parseInt(countElement.textContent);
+            const newCount = Math.max(0, currentCount + change);
+            countElement.textContent = newCount;
+        }
+
+        function checkMyActivitiesEmpty() {
+            const grid = document.getElementById('myActivitiesGrid');
+            const emptyState = document.getElementById('myActivitiesEmpty');
+            const cards = grid.querySelectorAll('.activity-card');
+            
+            if (cards.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                grid.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        function addActivityCard(activityData) {
+            // This would generate a new activity card
+            // For demo purposes, we'll just show a notification
+            showNotification('Card mới sẽ được thêm vào danh sách!', 'info');
+        }
+
+        function updateActivityCard(activityId, activityData) {
+            // This would update the existing activity card
+            showNotification('Card hoạt động đã được cập nhật!', 'info');
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const resetFilters = document.getElementById('resetFilters');
+
+        function filterActivities() {
+            // Implementation for filtering activities
+            console.log('Filtering activities...');
+        }
+
+        searchInput?.addEventListener('input', filterActivities);
+        categoryFilter?.addEventListener('change', filterActivities);
+        statusFilter?.addEventListener('change', filterActivities);
+        resetFilters?.addEventListener('click', function() {
+            if (categoryFilter) categoryFilter.value = '';
+            if (statusFilter) statusFilter.value = '';
+            if (searchInput) searchInput.value = '';
+            filterActivities();
+        });
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 
+                'bg-blue-500'
+            } text-white max-w-sm`;
+            notification.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-close sidebar on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    closeSidebarFn();
+                }
+            });
+
+            // Check empty state on load
+            checkMyActivitiesEmpty();
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !activityModal.classList.contains('hidden')) {
+                closeModalFn();
+            }
+        });
+
+        // Prevent modal close when clicking inside modal content
+        activityModal.addEventListener('click', function(e) {
+            if (e.target === activityModal) {
+                closeModalFn();
+            }
+        });
+    </script>
+</body>
+</html>
