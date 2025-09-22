@@ -6,6 +6,7 @@
     <title>Dashboard - EduActivities</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -344,6 +345,46 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Charts Section -->
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6">Thống kê chi tiết</h2>
+                            
+                            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                                <!-- Activity Chart -->
+                                <div class="xl:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200">
+                                    <div class="p-6 border-b border-gray-200">
+                                        <h3 class="text-lg font-semibold text-gray-800">Hoạt động tham gia theo tháng</h3>
+                                        <p class="text-sm text-gray-500">Biểu đồ thống kê số lượng hoạt động đã tham gia trong 6 tháng gần đây</p>
+                                    </div>
+                                    <div class="p-6">
+                                        <canvas id="activityChart" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Types Pie Chart -->
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                                    <div class="p-6 border-b border-gray-200">
+                                        <h3 class="text-lg font-semibold text-gray-800">Phân loại hoạt động</h3>
+                                        <p class="text-sm text-gray-500">Tỷ lệ các loại hoạt động đã tham gia</p>
+                                    </div>
+                                    <div class="p-6">
+                                        <canvas id="activityTypesChart" width="300" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Points Progress Chart -->
+                            <div class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200">
+                                <div class="p-6 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800">Xu hướng điểm tích lũy</h3>
+                                    <p class="text-sm text-gray-500">Quá trình tích lũy điểm của bạn trong 6 tháng gần đây</p>
+                                </div>
+                                <div class="p-6">
+                                    <canvas id="pointsChart" width="400" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -434,7 +475,225 @@
                     closeSidebarFn();
                 }
             });
+
+            // Initialize Charts
+            initializeCharts();
         });
+
+        // Initialize all charts
+        function initializeCharts() {
+            // Activity Chart (Bar Chart)
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            new Chart(activityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9'],
+                    datasets: [{
+                        label: 'Số hoạt động tham gia',
+                        data: [2, 4, 3, 6, 5, 3],
+                        backgroundColor: [
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(16, 185, 129, 0.8)', 
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(107, 114, 128, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(37, 99, 235, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(139, 92, 246, 1)',
+                            'rgba(107, 114, 128, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                stepSize: 1,
+                                color: '#6B7280'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            }
+                        }
+                    },
+                    elements: {
+                        bar: {
+                            backgroundColor: 'rgba(37, 99, 235, 0.8)'
+                        }
+                    }
+                }
+            });
+
+            // Activity Types Chart (Doughnut Chart)
+            const typesCtx = document.getElementById('activityTypesChart').getContext('2d');
+            new Chart(typesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Hội thảo', 'Workshop', 'Thể thao', 'Văn hóa', 'Khác'],
+                    datasets: [{
+                        data: [5, 4, 2, 3, 1],
+                        backgroundColor: [
+                            '#2563eb',
+                            '#10b981',
+                            '#f59e0b',
+                            '#ef4444',
+                            '#8b5cf6'
+                        ],
+                        borderColor: [
+                            '#1d4ed8',
+                            '#059669',
+                            '#d97706',
+                            '#dc2626',
+                            '#7c3aed'
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                color: '#374151'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed * 100) / total).toFixed(1);
+                                    return context.label + ': ' + context.parsed + ' (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            // Points Progress Chart (Line Chart)
+            const pointsCtx = document.getElementById('pointsChart').getContext('2d');
+            new Chart(pointsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9'],
+                    datasets: [{
+                        label: 'Điểm tích lũy',
+                        data: [25, 40, 55, 70, 78, 85],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#2563eb',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointHoverBackgroundColor: '#1d4ed8',
+                        pointHoverBorderColor: '#ffffff',
+                        pointHoverBorderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Điểm: ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                stepSize: 20,
+                                color: '#6B7280',
+                                callback: function(value) {
+                                    return value + ' điểm';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6B7280'
+                            }
+                        }
+                    },
+                    elements: {
+                        point: {
+                            hoverBackgroundColor: '#1d4ed8'
+                        }
+                    }
+                }
+            });
+        }
 
         // Common function to clear and set page content
         function setPageContent(content) {
