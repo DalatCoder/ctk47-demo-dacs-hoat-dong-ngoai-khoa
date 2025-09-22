@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục hoạt động - EduActivities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-white w-64 min-h-screen shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 z-30">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">EduActivities</h1>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700" aria-label="Close sidebar" title="Close sidebar">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-lg">NV</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">Nguyễn Văn A</h3>
+                        <p class="text-sm text-gray-500">SV001234567</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" id="nav-dashboard" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="activities.html" id="nav-activities" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="nav-categories" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-tags"></i>
+                            <span>Danh mục</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" id="nav-profile" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Hồ sơ cá nhân</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Secondary Menu -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Khác</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-bell"></i>
+                                <span>Thông báo</span>
+                                <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-cog"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Trợ giúp</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="../login.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition duration-200 w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <!-- Left side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Mobile menu button -->
+                        <button id="menuToggle" class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Open menu" title="Open menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Breadcrumb -->
+                        <nav class="hidden sm:flex" aria-label="Breadcrumb">
+                            <ol class="flex items-center space-x-2">
+                                <li>
+                                    <a href="dashboard.html" class="text-gray-500 hover:text-gray-700" aria-label="Về Dashboard" title="Về Dashboard">
+                                        <i class="fas fa-home"></i>
+                                    </a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-sm"></i>
+                                    <span id="currentPage" class="text-gray-700 font-medium">Danh mục</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Center - Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" id="searchCategories" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition duration-300" placeholder="Tìm kiếm danh mục..." title="Tìm kiếm danh mục">
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search button for mobile -->
+                        <button class="md:hidden text-gray-500 hover:text-gray-700" aria-label="Search" title="Search">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+
+                        <!-- Notifications -->
+                        <div class="relative">
+                            <button class="text-gray-500 hover:text-gray-700 relative" aria-label="Notifications" title="Notifications">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">3</span>
+                            </button>
+                        </div>
+
+                        <!-- User Menu -->
+                        <div class="relative">
+                            <button id="userMenuToggle" class="flex items-center space-x-3 text-gray-700 hover:text-gray-900 focus:outline-none" aria-label="User menu" title="User menu">
+                                <div class="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">NV</span>
+                                </div>
+                                <span class="hidden md:block font-medium">Nguyễn Văn A</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+
+                            <!-- Dropdown -->
+                            <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10">
+                                <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user-circle mr-2"></i>
+                                    Hồ sơ cá nhân
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-cog mr-2"></i>
+                                    Cài đặt
+                                </a>
+                                <div class="border-t border-gray-200"></div>
+                                <a href="../login.html" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Page Title -->
+                    <div class="mb-8">
+                        <h1 id="pageTitle" class="text-3xl font-bold text-gray-800">Danh mục hoạt động</h1>
+                        <p id="pageDescription" class="text-gray-600 mt-2">Tạo và quản lý các danh mục để phân loại hoạt động ngoại khóa</p>
+                    </div>
+
+                    <!-- Content will be inserted here by individual pages -->
+                    <div id="pageContent">
+                        <!-- Categories Management Content -->
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                            <!-- Categories List -->
+                            <div class="lg:col-span-3">
+                                <!-- Header Actions -->
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6 p-6">
+                                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+                                        <div>
+                                            <h2 class="text-xl font-semibold text-gray-800">Danh sách danh mục</h2>
+                                            <p class="text-gray-600 text-sm mt-1">Quản lý các danh mục hoạt động của bạn</p>
+                                        </div>
+                                        <button id="addCategoryBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-200 flex items-center space-x-2" aria-label="Thêm danh mục mới" title="Thêm danh mục mới">
+                                            <i class="fas fa-plus"></i>
+                                            <span>Thêm danh mục</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Categories Grid -->
+                                <div id="categoriesGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                                    <!-- Example Categories -->
+                                    <div class="category-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition duration-200">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-laptop-code text-blue-600 text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-gray-800">Công nghệ</h3>
+                                                    <p class="text-sm text-gray-500">12 hoạt động</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <button class="edit-category-btn text-gray-400 hover:text-blue-600 transition duration-200" data-category-id="1" aria-label="Chỉnh sửa danh mục" title="Chỉnh sửa">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="delete-category-btn text-gray-400 hover:text-red-600 transition duration-200" data-category-id="1" aria-label="Xóa danh mục" title="Xóa">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Các hoạt động liên quan đến công nghệ thông tin, lập trình, và khoa học máy tính</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                <span class="w-2 h-2 bg-blue-600 rounded-full mr-1"></span>
+                                                Công nghệ
+                                            </span>
+                                            <span class="text-xs text-gray-500">Cập nhật 2 ngày trước</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition duration-200">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-running text-green-600 text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-gray-800">Thể thao</h3>
+                                                    <p class="text-sm text-gray-500">8 hoạt động</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <button class="edit-category-btn text-gray-400 hover:text-blue-600 transition duration-200" data-category-id="2" aria-label="Chỉnh sửa danh mục" title="Chỉnh sửa">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="delete-category-btn text-gray-400 hover:text-red-600 transition duration-200" data-category-id="2" aria-label="Xóa danh mục" title="Xóa">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Các hoạt động thể thao, rèn luyện sức khỏe và tinh thần đồng đội</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                <span class="w-2 h-2 bg-green-600 rounded-full mr-1"></span>
+                                                Thể thao
+                                            </span>
+                                            <span class="text-xs text-gray-500">Cập nhật 1 tuần trước</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition duration-200">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-palette text-purple-600 text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-gray-800">Nghệ thuật</h3>
+                                                    <p class="text-sm text-gray-500">5 hoạt động</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <button class="edit-category-btn text-gray-400 hover:text-blue-600 transition duration-200" data-category-id="3" aria-label="Chỉnh sửa danh mục" title="Chỉnh sửa">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="delete-category-btn text-gray-400 hover:text-red-600 transition duration-200" data-category-id="3" aria-label="Xóa danh mục" title="Xóa">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Các hoạt động sáng tạo, văn hóa và nghệ thuật</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                <span class="w-2 h-2 bg-purple-600 rounded-full mr-1"></span>
+                                                Nghệ thuật
+                                            </span>
+                                            <span class="text-xs text-gray-500">Cập nhật 3 ngày trước</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition duration-200">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-hands-helping text-yellow-600 text-xl"></i>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-gray-800">Tình nguyện</h3>
+                                                    <p class="text-sm text-gray-500">15 hoạt động</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <button class="edit-category-btn text-gray-400 hover:text-blue-600 transition duration-200" data-category-id="4" aria-label="Chỉnh sửa danh mục" title="Chỉnh sửa">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="delete-category-btn text-gray-400 hover:text-red-600 transition duration-200" data-category-id="4" aria-label="Xóa danh mục" title="Xóa">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm mb-4">Các hoạt động thiện nguyện, hỗ trợ cộng đồng và phục vụ xã hội</p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                <span class="w-2 h-2 bg-yellow-600 rounded-full mr-1"></span>
+                                                Tình nguyện
+                                            </span>
+                                            <span class="text-xs text-gray-500">Cập nhật 5 ngày trước</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Empty State -->
+                                <div id="emptyState" class="hidden bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+                                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-tags text-gray-400 text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Chưa có danh mục nào</h3>
+                                    <p class="text-gray-600 mb-6">Bạn chưa tạo danh mục nào. Hãy thêm danh mục đầu tiên để bắt đầu phân loại hoạt động.</p>
+                                    <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-200">
+                                        Tạo danh mục đầu tiên
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Statistics Sidebar -->
+                            <div class="lg:col-span-1">
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Thống kê</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-600">Tổng danh mục</span>
+                                            <span class="font-semibold text-gray-800">4</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-600">Hoạt động</span>
+                                            <span class="font-semibold text-gray-800">40</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-gray-600">Phổ biến nhất</span>
+                                            <span class="font-semibold text-gray-800">Tình nguyện</span>
+                                        </div>
+                                        <div class="border-t border-gray-200 pt-4">
+                                            <div class="text-sm text-gray-600 mb-2">Phân bố danh mục</div>
+                                            <div class="space-y-2">
+                                                <div class="flex items-center">
+                                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></div>
+                                                    <span class="text-sm text-gray-600 flex-1">Tình nguyện</span>
+                                                    <span class="text-sm font-medium">37.5%</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                                    <span class="text-sm text-gray-600 flex-1">Công nghệ</span>
+                                                    <span class="text-sm font-medium">30%</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                                    <span class="text-sm text-gray-600 flex-1">Thể thao</span>
+                                                    <span class="text-sm font-medium">20%</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <div class="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                                                    <span class="text-sm text-gray-600 flex-1">Nghệ thuật</span>
+                                                    <span class="text-sm font-medium">12.5%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Actions -->
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Thao tác nhanh</h3>
+                                    <div class="space-y-3">
+                                        <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition duration-200 flex items-center space-x-3" aria-label="Xuất dữ liệu" title="Xuất dữ liệu">
+                                            <i class="fas fa-download text-gray-400"></i>
+                                            <span class="text-gray-700">Xuất dữ liệu</span>
+                                        </button>
+                                        <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition duration-200 flex items-center space-x-3" aria-label="Nhập dữ liệu" title="Nhập dữ liệu">
+                                            <i class="fas fa-upload text-gray-400"></i>
+                                            <span class="text-gray-700">Nhập dữ liệu</span>
+                                        </button>
+                                        <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition duration-200 flex items-center space-x-3" aria-label="Sắp xếp lại" title="Sắp xếp lại">
+                                            <i class="fas fa-sort text-gray-400"></i>
+                                            <span class="text-gray-700">Sắp xếp lại</span>
+                                        </button>
+                                        <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition duration-200 flex items-center space-x-3" aria-label="Cài đặt" title="Cài đặt">
+                                            <i class="fas fa-cog text-gray-400"></i>
+                                            <span class="text-gray-700">Cài đặt</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add/Edit Category Modal -->
+    <div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 id="modalTitle" class="text-lg font-semibold text-gray-800">Thêm danh mục mới</h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600" aria-label="Đóng modal" title="Đóng">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <form id="categoryForm" class="p-6 space-y-6">
+                <!-- Category Name -->
+                <div>
+                    <label for="categoryName" class="block text-sm font-medium text-gray-700 mb-2">Tên danh mục *</label>
+                    <input type="text" id="categoryName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Nhập tên danh mục..." title="Tên danh mục">
+                    <p class="text-xs text-gray-500 mt-1">Tên danh mục phải có ít nhất 2 ký tự</p>
+                </div>
+
+                <!-- Category Description -->
+                <div>
+                    <label for="categoryDescription" class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                    <textarea id="categoryDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Mô tả chi tiết về danh mục..." title="Mô tả danh mục"></textarea>
+                </div>
+
+                <!-- Category Icon -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Biểu tượng</label>
+                    <div class="grid grid-cols-6 gap-3">
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-laptop-code" aria-label="Laptop code icon" title="Laptop code">
+                            <i class="fas fa-laptop-code"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-running" aria-label="Running icon" title="Running">
+                            <i class="fas fa-running"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-palette" aria-label="Palette icon" title="Palette">
+                            <i class="fas fa-palette"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-hands-helping" aria-label="Helping hands icon" title="Helping hands">
+                            <i class="fas fa-hands-helping"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-book" aria-label="Book icon" title="Book">
+                            <i class="fas fa-book"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-music" aria-label="Music icon" title="Music">
+                            <i class="fas fa-music"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-camera" aria-label="Camera icon" title="Camera">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-microphone" aria-label="Microphone icon" title="Microphone">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-theater-masks" aria-label="Theater masks icon" title="Theater masks">
+                            <i class="fas fa-theater-masks"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-graduation-cap" aria-label="Graduation cap icon" title="Graduation cap">
+                            <i class="fas fa-graduation-cap"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-globe" aria-label="Globe icon" title="Globe">
+                            <i class="fas fa-globe"></i>
+                        </button>
+                        <button type="button" class="icon-option w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition duration-200" data-icon="fas fa-star" aria-label="Star icon" title="Star">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </div>
+                    <input type="hidden" id="selectedIcon" value="fas fa-tags">
+                </div>
+
+                <!-- Category Color -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Màu sắc</label>
+                    <div class="grid grid-cols-8 gap-3">
+                        <button type="button" class="color-option w-8 h-8 bg-blue-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="blue" aria-label="Blue color" title="Blue">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-green-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="green" aria-label="Green color" title="Green">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-purple-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="purple" aria-label="Purple color" title="Purple">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-yellow-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="yellow" aria-label="Yellow color" title="Yellow">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-red-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="red" aria-label="Red color" title="Red">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-pink-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="pink" aria-label="Pink color" title="Pink">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-indigo-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="indigo" aria-label="Indigo color" title="Indigo">
+                        </button>
+                        <button type="button" class="color-option w-8 h-8 bg-gray-500 rounded-lg border-2 border-transparent hover:border-gray-300 transition duration-200" data-color="gray" aria-label="Gray color" title="Gray">
+                        </button>
+                    </div>
+                    <input type="hidden" id="selectedColor" value="blue">
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                    <button type="button" id="cancelBtn" class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200" aria-label="Hủy" title="Hủy">
+                        Hủy
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition duration-200" aria-label="Lưu danh mục" title="Lưu">
+                        Lưu danh mục
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4">
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Xác nhận xóa</h3>
+                        <p class="text-gray-600">Bạn có chắc chắn muốn xóa danh mục này?</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mb-6">Thao tác này không thể hoàn tác. Tất cả hoạt động trong danh mục sẽ được chuyển về "Không phân loại".</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelDeleteBtn" class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200" aria-label="Hủy xóa" title="Hủy">
+                        Hủy
+                    </button>
+                    <button id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200" aria-label="Xác nhận xóa" title="Xóa">
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        overlay.addEventListener('click', closeSidebarFn);
+
+        // User dropdown toggle
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Active navigation highlighting
+        function setActiveNav() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('bg-primary', 'text-white');
+                link.classList.add('text-gray-700');
+            });
+
+            // Set active for categories page
+            if (currentPath.includes('categories.html')) {
+                document.getElementById('nav-categories').classList.add('bg-primary', 'text-white');
+                document.getElementById('nav-categories').classList.remove('text-gray-700');
+            }
+        }
+
+        // Update page info function - can be called by other pages
+        function updatePageInfo(title, description, breadcrumb) {
+            document.getElementById('pageTitle').textContent = title;
+            document.getElementById('pageDescription').textContent = description;
+            document.getElementById('currentPage').textContent = breadcrumb || title;
+            document.title = title + ' - EduActivities';
+        }
+
+        // Common function to clear and set page content
+        function setPageContent(content) {
+            document.getElementById('pageContent').innerHTML = content;
+        }
+
+        // Category Modal Management
+        const categoryModal = document.getElementById('categoryModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const categoryForm = document.getElementById('categoryForm');
+        const modalTitle = document.getElementById('modalTitle');
+
+        let editingCategoryId = null;
+
+        function openCategoryModal(isEdit = false, categoryData = null) {
+            editingCategoryId = isEdit ? categoryData?.id : null;
+            modalTitle.textContent = isEdit ? 'Chỉnh sửa danh mục' : 'Thêm danh mục mới';
+            
+            if (isEdit && categoryData) {
+                document.getElementById('categoryName').value = categoryData.name || '';
+                document.getElementById('categoryDescription').value = categoryData.description || '';
+                document.getElementById('selectedIcon').value = categoryData.icon || 'fas fa-tags';
+                document.getElementById('selectedColor').value = categoryData.color || 'blue';
+                
+                // Update UI selections
+                updateIconSelection(categoryData.icon || 'fas fa-tags');
+                updateColorSelection(categoryData.color || 'blue');
+            } else {
+                categoryForm.reset();
+                document.getElementById('selectedIcon').value = 'fas fa-tags';
+                document.getElementById('selectedColor').value = 'blue';
+                updateIconSelection('fas fa-tags');
+                updateColorSelection('blue');
+            }
+            
+            categoryModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            document.getElementById('categoryName').focus();
+        }
+
+        function closeCategoryModal() {
+            categoryModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            editingCategoryId = null;
+        }
+
+        // Icon and Color Selection
+        function updateIconSelection(selectedIcon) {
+            document.querySelectorAll('.icon-option').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-100');
+                if (btn.dataset.icon === selectedIcon) {
+                    btn.classList.add('bg-primary', 'text-white');
+                    btn.classList.remove('bg-gray-100');
+                }
+            });
+        }
+
+        function updateColorSelection(selectedColor) {
+            document.querySelectorAll('.color-option').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-gray-400');
+                if (btn.dataset.color === selectedColor) {
+                    btn.classList.add('ring-2', 'ring-gray-400');
+                }
+            });
+        }
+
+        // Search functionality
+        function searchCategories() {
+            const searchTerm = document.getElementById('searchCategories').value.toLowerCase();
+            const categoryCards = document.querySelectorAll('.category-card');
+            let visibleCount = 0;
+
+            categoryCards.forEach(card => {
+                const categoryName = card.querySelector('h3').textContent.toLowerCase();
+                const categoryDesc = card.querySelector('p').textContent.toLowerCase();
+                
+                if (categoryName.includes(searchTerm) || categoryDesc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide empty state based on search results
+            const emptyState = document.getElementById('emptyState');
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            
+            if (visibleCount === 0 && searchTerm) {
+                categoriesGrid.style.display = 'none';
+                emptyState.classList.remove('hidden');
+                emptyState.innerHTML = `
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search text-gray-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Không tìm thấy kết quả</h3>
+                    <p class="text-gray-600 mb-6">Không có danh mục nào phù hợp với từ khóa "${searchTerm}".</p>
+                    <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-200" onclick="document.getElementById('searchCategories').value = ''; searchCategories();">
+                        Xóa bộ lọc
+                    </button>
+                `;
+            } else {
+                categoriesGrid.style.display = 'grid';
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        // Event Listeners
+        addCategoryBtn.addEventListener('click', () => openCategoryModal());
+        closeModal.addEventListener('click', closeCategoryModal);
+        cancelBtn.addEventListener('click', closeCategoryModal);
+
+        // Icon selection
+        document.querySelectorAll('.icon-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.dataset.icon;
+                document.getElementById('selectedIcon').value = icon;
+                updateIconSelection(icon);
+            });
+        });
+
+        // Color selection
+        document.querySelectorAll('.color-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const color = this.dataset.color;
+                document.getElementById('selectedColor').value = color;
+                updateColorSelection(color);
+            });
+        });
+
+        // Search input
+        document.getElementById('searchCategories').addEventListener('input', searchCategories);
+
+        // Form submission
+        categoryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('categoryName').value,
+                description: document.getElementById('categoryDescription').value,
+                icon: document.getElementById('selectedIcon').value,
+                color: document.getElementById('selectedColor').value
+            };
+
+            // Basic validation
+            if (formData.name.trim().length < 2) {
+                alert('Tên danh mục phải có ít nhất 2 ký tự!');
+                return;
+            }
+
+            // Simulate save (replace with actual API call)
+            console.log('Saving category:', formData);
+            
+            // Close modal and show success message
+            closeCategoryModal();
+            
+            // Here you would typically refresh the categories list
+            // For demo purposes, we'll just show an alert
+            alert(editingCategoryId ? 'Danh mục đã được cập nhật!' : 'Danh mục mới đã được tạo!');
+        });
+
+        // Edit category functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.edit-category-btn')) {
+                const categoryId = e.target.closest('.edit-category-btn').dataset.categoryId;
+                // In a real app, you'd fetch the category data by ID
+                const mockCategoryData = {
+                    id: categoryId,
+                    name: 'Công nghệ',
+                    description: 'Các hoạt động liên quan đến công nghệ thông tin',
+                    icon: 'fas fa-laptop-code',
+                    color: 'blue'
+                };
+                openCategoryModal(true, mockCategoryData);
+            }
+        });
+
+        // Delete category functionality
+        let deletingCategoryId = null;
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.delete-category-btn')) {
+                deletingCategoryId = e.target.closest('.delete-category-btn').dataset.categoryId;
+                deleteModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        });
+
+        document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
+            deleteModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            deletingCategoryId = null;
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (deletingCategoryId) {
+                // Simulate delete (replace with actual API call)
+                console.log('Deleting category:', deletingCategoryId);
+                
+                // Remove the category card from UI
+                const categoryCard = document.querySelector(`[data-category-id="${deletingCategoryId}"]`).closest('.category-card');
+                if (categoryCard) {
+                    categoryCard.remove();
+                }
+                
+                // Close modal
+                deleteModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                deletingCategoryId = null;
+                
+                alert('Danh mục đã được xóa!');
+            }
+        });
+
+        // Close modals when clicking outside
+        categoryModal.addEventListener('click', function(e) {
+            if (e.target === categoryModal) {
+                closeCategoryModal();
+            }
+        });
+
+        deleteModal.addEventListener('click', function(e) {
+            if (e.target === deleteModal) {
+                deleteModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (!categoryModal.classList.contains('hidden')) {
+                    closeCategoryModal();
+                }
+                if (!deleteModal.classList.contains('hidden')) {
+                    deleteModal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNav();
+            
+            // Auto-close sidebar on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    closeSidebarFn();
+                }
+            });
+
+            // Initialize icon and color selections
+            updateIconSelection('fas fa-tags');
+            updateColorSelection('blue');
+        });
+    </script>
+</body>
+</html>
