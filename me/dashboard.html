@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduActivities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-white w-64 min-h-screen shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 z-30">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">EduActivities</h1>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700" aria-label="Close sidebar" title="Close sidebar">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- User Info -->
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-lg">NV</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">Nguyễn Văn A</h3>
+                        <p class="text-sm text-gray-500">SV001234567</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" id="nav-dashboard" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="activities.html" id="nav-activities" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="nav-categories" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-tags"></i>
+                            <span>Danh mục</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" id="nav-profile" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary hover:text-white transition duration-200">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Hồ sơ cá nhân</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Secondary Menu -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Khác</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-bell"></i>
+                                <span>Thông báo</span>
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full ml-auto">3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-cog"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Trợ giúp</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="../login.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition duration-200 w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <!-- Left side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Mobile menu button -->
+                        <button id="menuToggle" class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Open menu" title="Open menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Breadcrumb -->
+                        <nav class="hidden sm:flex" aria-label="Breadcrumb">
+                            <ol class="flex items-center space-x-2">
+                                <li>
+                                    <a href="dashboard.html" class="text-gray-500 hover:text-gray-700" aria-label="Home" title="Go to Dashboard">
+                                        <i class="fas fa-home"></i>
+                                    </a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-sm"></i>
+                                    <span id="currentPage" class="text-gray-700 font-medium">Dashboard</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Center - Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition duration-300" placeholder="Tìm kiếm hoạt động...">
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search button for mobile -->
+                        <button class="md:hidden text-gray-500 hover:text-gray-700" aria-label="Search" title="Search">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+
+                        <!-- Notifications -->
+                        <div class="relative">
+                            <button class="text-gray-500 hover:text-gray-700 relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">3</span>
+                            </button>
+                        </div>
+
+                        <!-- User Menu -->
+                        <div class="relative">
+                            <button id="userMenuToggle" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <div class="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">NV</span>
+                                </div>
+                                <span class="hidden sm:block">Nguyễn Văn A</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-10">
+                                <div class="py-2">
+                                    <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user-circle mr-2"></i>
+                                        Hồ sơ cá nhân
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-cog mr-2"></i>
+                                        Cài đặt
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../login.html" class="block px-4 py-2 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Page Title -->
+                    <div class="mb-8">
+                        <h1 id="pageTitle" class="text-3xl font-bold text-gray-800">Dashboard</h1>
+                        <p id="pageDescription" class="text-gray-600 mt-2">Tổng quan về hoạt động ngoại khóa của bạn</p>
+                    </div>
+
+                    <!-- Content will be inserted here by individual pages -->
+                    <div id="pageContent">
+                        <!-- Dashboard specific content -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Stats Cards -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Hoạt động đã tham gia</p>
+                                        <p class="text-2xl font-bold text-gray-800">12</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-calendar-check text-primary text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Điểm tích lũy</p>
+                                        <p class="text-2xl font-bold text-gray-800">85</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-star text-green-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Hoạt động sắp tới</p>
+                                        <p class="text-2xl font-bold text-gray-800">3</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-yellow-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-clock text-yellow-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Thông báo mới</p>
+                                        <p class="text-2xl font-bold text-gray-800">5</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-red-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-bell text-red-500 text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activities -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Recent Activities Card -->
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                                <div class="p-6 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800">Hoạt động gần đây</h3>
+                                </div>
+                                <div class="p-6">
+                                    <div class="space-y-4">
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-calendar-plus text-primary text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Đăng ký tham gia Hội thảo Khởi nghiệp</p>
+                                                <p class="text-gray-500 text-sm">2 giờ trước</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-green-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-check text-green-500 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Hoàn thành Workshop Thiết kế UI/UX</p>
+                                                <p class="text-gray-500 text-sm">1 ngày trước</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-8 h-8 bg-yellow-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-star text-yellow-500 text-sm"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-gray-800 font-medium">Nhận điểm tích lũy từ CLB Tiếng Anh</p>
+                                                <p class="text-gray-500 text-sm">3 ngày trước</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Upcoming Events -->
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                                <div class="p-6 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800">Sự kiện sắp tới</h3>
+                                </div>
+                                <div class="p-6">
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-microphone text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-800">Hội thảo Khởi nghiệp</p>
+                                                    <p class="text-sm text-gray-500">15:00 - 25/09/2025</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Sắp diễn ra</span>
+                                        </div>
+                                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-10 h-10 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-running text-green-500"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-800">Giải chạy Marathon</p>
+                                                    <p class="text-sm text-gray-500">06:00 - 30/09/2025</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Đã đăng ký</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        overlay.addEventListener('click', closeSidebarFn);
+
+        // User dropdown toggle
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Active navigation highlighting
+        function setActiveNav() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('bg-primary', 'text-white');
+                link.classList.add('text-gray-700');
+            });
+
+            // Set active based on current page
+            if (currentPath.includes('dashboard.html') || currentPath.endsWith('/me/')) {
+                document.getElementById('nav-dashboard').classList.add('bg-primary', 'text-white');
+                document.getElementById('nav-dashboard').classList.remove('text-gray-700');
+            } else if (currentPath.includes('activities.html')) {
+                document.getElementById('nav-activities').classList.add('bg-primary', 'text-white');
+                document.getElementById('nav-activities').classList.remove('text-gray-700');
+            } else if (currentPath.includes('categories.html')) {
+                document.getElementById('nav-categories').classList.add('bg-primary', 'text-white');
+                document.getElementById('nav-categories').classList.remove('text-gray-700');
+            } else if (currentPath.includes('profile.html')) {
+                document.getElementById('nav-profile').classList.add('bg-primary', 'text-white');
+                document.getElementById('nav-profile').classList.remove('text-gray-700');
+            }
+        }
+
+        // Update page info function - can be called by other pages
+        function updatePageInfo(title, description, breadcrumb) {
+            document.getElementById('pageTitle').textContent = title;
+            document.getElementById('pageDescription').textContent = description;
+            document.getElementById('currentPage').textContent = breadcrumb || title;
+            document.title = title + ' - EduActivities';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNav();
+            
+            // Auto-close sidebar on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    closeSidebarFn();
+                }
+            });
+        });
+
+        // Common function to clear and set page content
+        function setPageContent(content) {
+            document.getElementById('pageContent').innerHTML = content;
+        }
+    </script>
+</body>
+</html>
