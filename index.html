@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduActivities - Quản lý hoạt động ngoại khóa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-2xl text-primary"></i>
+                    <span class="text-xl font-bold text-gray-800">EduActivities</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-primary transition duration-300">Tính năng</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-primary transition duration-300">Cách hoạt động</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary transition duration-300">Giới thiệu</a>
+                    <a href="login.html" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-300">
+                        Đăng nhập
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none" aria-label="Toggle mobile menu" title="Toggle mobile menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#features" class="text-gray-600 hover:text-primary transition duration-300">Tính năng</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-primary transition duration-300">Cách hoạt động</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary transition duration-300">Giới thiệu</a>
+                    <a href="login.html" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-300 text-center">
+                        Đăng nhập
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-600 via-primary to-secondary text-white py-20 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Quản lý hoạt động ngoại khóa
+                    <span class="block text-yellow-300">một cách hiệu quả</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Nền tảng toàn diện giúp sinh viên tham gia, theo dõi và quản lý các hoạt động ngoại khóa một cách dễ dàng và tiện lợi
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="login.html" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
+                        Bắt đầu ngay
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition duration-300">
+                        Tìm hiểu thêm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Tính năng nổi bật
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Khám phá những tính năng mạnh mẽ giúp bạn quản lý hoạt động ngoại khóa hiệu quả
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Quản lý hoạt động</h3>
+                    <p class="text-gray-600">
+                        Tạo, chỉnh sửa và theo dõi các hoạt động ngoại khóa với giao diện trực quan và dễ sử dụng
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-green-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Quản lý thành viên</h3>
+                    <p class="text-gray-600">
+                        Theo dõi danh sách sinh viên tham gia, điểm danh và đánh giá hiệu suất một cách sistemát
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-purple-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Báo cáo & Thống kê</h3>
+                    <p class="text-gray-600">
+                        Xem báo cáo chi tiết về tình hình tham gia và hiệu quả của các hoạt động ngoại khóa
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-red-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-bell text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Thông báo</h3>
+                    <p class="text-gray-600">
+                        Nhận thông báo về các hoạt động mới, thay đổi lịch trình và cập nhật quan trọng
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-yellow-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-tags text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Phân loại hoạt động</h3>
+                    <p class="text-gray-600">
+                        Tổ chức các hoạt động theo danh mục để dễ dàng tìm kiếm và quản lý
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center hover:shadow-lg transition duration-300">
+                    <div class="bg-indigo-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-user-circle text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Hồ sơ cá nhân</h3>
+                    <p class="text-gray-600">
+                        Quản lý thông tin cá nhân và theo dõi lịch sử tham gia các hoạt động ngoại khóa
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Cách hoạt động
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Chỉ với 3 bước đơn giản, bạn có thể bắt đầu sử dụng hệ thống quản lý hoạt động ngoại khóa
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="text-white text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Đăng ký & Đăng nhập</h3>
+                    <p class="text-gray-600">
+                        Tạo tài khoản hoặc đăng nhập bằng thông tin sinh viên để truy cập vào hệ thống
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="text-white text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Khám phá hoạt động</h3>
+                    <p class="text-gray-600">
+                        Duyệt qua danh sách các hoạt động ngoại khóa và chọn những hoạt động phù hợp với bạn
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="bg-primary rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 relative">
+                        <span class="text-white text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Tham gia & Theo dõi</h3>
+                    <p class="text-gray-600">
+                        Đăng ký tham gia hoạt động và theo dõi tiến trình thông qua dashboard cá nhân
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
+                    Về EduActivities
+                </h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    EduActivities là nền tảng quản lý hoạt động ngoại khóa được thiết kế đặc biệt cho môi trường giáo dục. 
+                    Chúng tôi hiểu rằng hoạt động ngoại khóa đóng vai trò quan trọng trong việc phát triển toàn diện của sinh viên, 
+                    không chỉ về mặt học thuật mà còn về kỹ năng sống, kỹ năng xã hội và phát triển cá nhân.
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Với giao diện thân thiện, tính năng mạnh mẽ và khả năng tùy biến cao, EduActivities giúp các tổ chức giáo dục 
+                    quản lý hiệu quả các chương trình ngoại khóa, đồng thời mang lại trải nghiệm tuyệt vời cho sinh viên trong 
+                    việc khám phá và tham gia các hoạt động phù hợp với sở thích và mục tiêu cá nhân.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Sẵn sàng bắt đầu?
+            </h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Tham gia cùng hàng ngàn sinh viên đang sử dụng EduActivities để quản lý hoạt động ngoại khóa hiệu quả
+            </p>
+            <a href="login.html" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105 inline-block">
+                Đăng nhập ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-graduation-cap text-2xl text-primary"></i>
+                        <span class="text-xl font-bold">EduActivities</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Nền tảng quản lý hoạt động ngoại khóa toàn diện, giúp sinh viên phát triển kỹ năng và tham gia 
+                        các hoạt động ý nghĩa trong suốt quá trình học tập.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300" aria-label="Facebook" title="Facebook">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300" aria-label="Twitter" title="Twitter">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300" aria-label="Instagram" title="Instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300" aria-label="LinkedIn" title="LinkedIn">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liên kết nhanh</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition duration-300">Tính năng</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition duration-300">Cách hoạt động</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">Giới thiệu</a></li>
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition duration-300">Đăng nhập</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Hỗ trợ</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Trung tâm trợ giúp</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Liên hệ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Báo cáo lỗi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 EduActivities. Tất cả quyền được bảo lưu.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
