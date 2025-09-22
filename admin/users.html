@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý người dùng - Admin - EduActivities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        admin: '#dc2626',
+                        adminLight: '#fef2f2',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Admin Sidebar -->
+        <aside id="sidebar" class="bg-white w-64 min-h-screen shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 z-30">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-admin to-red-700">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-admin text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-white">EduActivities</h1>
+                        <p class="text-xs text-red-100">Quản trị viên</p>
+                    </div>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-white hover:text-red-200" aria-label="Close sidebar" title="Close sidebar">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Admin Info -->
+            <div class="p-4 border-b border-gray-200 bg-adminLight">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-admin to-red-700 rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-lg">GV</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">Trần Thị B</h3>
+                        <p class="text-sm text-admin">Admin #001</p>
+                        <p class="text-xs text-gray-500">Quản trị viên hệ thống</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 px-4 py-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" id="nav-dashboard" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html" id="nav-users" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-users"></i>
+                            <span>Quản lý người dùng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="activities.html" id="nav-activities" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Quản lý hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html" id="nav-categories" class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-admin hover:text-white transition duration-200">
+                            <i class="fas fa-tags"></i>
+                            <span>Quản lý danh mục</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Admin Tools Section -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Công cụ quản trị</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Báo cáo & Thống kê</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-download"></i>
+                                <span>Xuất dữ liệu</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-cogs"></i>
+                                <span>Cấu hình hệ thống</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Bảo mật</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-history"></i>
+                                <span>Nhật ký hệ thống</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div class="mt-8">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">Hỗ trợ</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Hướng dẫn sử dụng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-headset"></i>
+                                <span>Hỗ trợ kỹ thuật</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="../login.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition duration-200 w-full">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Admin Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <!-- Left side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Mobile menu button -->
+                        <button id="menuToggle" class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Open menu" title="Open menu">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+
+                        <!-- Admin Badge -->
+                        <div class="hidden sm:flex items-center space-x-2 bg-adminLight px-3 py-1 rounded-full">
+                            <i class="fas fa-shield-alt text-admin text-sm"></i>
+                            <span class="text-admin text-sm font-medium">Quản trị viên</span>
+                        </div>
+
+                        <!-- Breadcrumb -->
+                        <nav class="hidden md:flex" aria-label="Breadcrumb">
+                            <ol class="flex items-center space-x-2">
+                                <li>
+                                    <a href="dashboard.html" class="text-gray-500 hover:text-gray-700" aria-label="Admin Home" title="Go to Admin Dashboard">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-sm"></i>
+                                    <span id="currentPage" class="text-gray-700 font-medium">Quản lý người dùng</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Center - Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" id="globalSearch" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none transition duration-300" placeholder="Tìm kiếm theo tên, email...">
+                        </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search button for mobile -->
+                        <button class="md:hidden text-gray-500 hover:text-gray-700" aria-label="Search" title="Search">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+
+                        <!-- Quick Actions -->
+                        <div class="hidden lg:flex items-center space-x-2">
+                            <button id="addUserBtn" class="text-gray-500 hover:text-admin transition duration-200" title="Thêm người dùng mới">
+                                <i class="fas fa-user-plus text-lg"></i>
+                            </button>
+                            <button class="text-gray-500 hover:text-admin transition duration-200" title="Xuất dữ liệu">
+                                <i class="fas fa-download text-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- System Status -->
+                        <div class="hidden lg:flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span class="text-sm text-gray-600">Hệ thống hoạt động</span>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="relative">
+                            <button class="text-gray-500 hover:text-gray-700 relative">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-admin text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">5</span>
+                            </button>
+                        </div>
+
+                        <!-- Admin User Menu -->
+                        <div class="relative">
+                            <button id="userMenuToggle" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                <div class="w-8 h-8 bg-gradient-to-r from-admin to-red-700 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold text-sm">GV</span>
+                                </div>
+                                <span class="hidden sm:block">Trần Thị B</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+
+                            <!-- Admin Dropdown menu -->
+                            <div id="userDropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-10">
+                                <div class="py-2">
+                                    <div class="px-4 py-2 border-b border-gray-200">
+                                        <p class="text-sm text-gray-600">Đăng nhập với quyền</p>
+                                        <p class="text-sm font-medium text-admin">Quản trị viên</p>
+                                    </div>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user-cog mr-2"></i>
+                                        Hồ sơ quản trị
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-cogs mr-2"></i>
+                                        Cài đặt hệ thống
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Quyền truy cập
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../me/dashboard.html" class="block px-4 py-2 text-primary hover:bg-blue-50">
+                                        <i class="fas fa-user mr-2"></i>
+                                        Chế độ sinh viên
+                                    </a>
+                                    <hr class="my-2">
+                                    <a href="../login.html" class="block px-4 py-2 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Page Title -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-800">Quản lý người dùng</h1>
+                                <p class="text-gray-600 mt-2">Quản lý thông tin sinh viên và giảng viên</p>
+                            </div>
+                            <!-- Quick Actions for current page -->
+                            <div class="flex space-x-2">
+                                <button id="addUserBtnMain" class="bg-admin text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Thêm người dùng
+                                </button>
+                                <button id="exportBtn" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-200">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Xuất dữ liệu
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Tổng số người dùng</p>
+                                    <p class="text-2xl font-bold text-gray-800">1,247</p>
+                                    <p class="text-green-600 text-sm">+12% so với tháng trước</p>
+                                </div>
+                                <div class="w-12 h-12 bg-blue-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-users text-blue-500 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Sinh viên</p>
+                                    <p class="text-2xl font-bold text-gray-800">1,156</p>
+                                    <p class="text-blue-600 text-sm">92.7% tổng số</p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-user-graduate text-green-500 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Giảng viên</p>
+                                    <p class="text-2xl font-bold text-gray-800">91</p>
+                                    <p class="text-purple-600 text-sm">7.3% tổng số</p>
+                                </div>
+                                <div class="w-12 h-12 bg-purple-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-chalkboard-teacher text-purple-500 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Đang hoạt động</p>
+                                    <p class="text-2xl font-bold text-gray-800">1,203</p>
+                                    <p class="text-green-600 text-sm">96.5% tổng số</p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <!-- Search by Name/Email -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tìm kiếm</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-search text-gray-400"></i>
+                                        </div>
+                                        <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" placeholder="Tên hoặc email...">
+                                    </div>
+                                </div>
+
+                                <!-- Filter by Role -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Vai trò</label>
+                                    <select id="roleFilter" class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" title="Lọc theo vai trò" aria-label="Lọc người dùng theo vai trò">
+                                        <option value="">Tất cả vai trò</option>
+                                        <option value="student">Sinh viên</option>
+                                        <option value="teacher">Giảng viên</option>
+                                        <option value="admin">Quản trị viên</option>
+                                    </select>
+                                </div>
+
+                                <!-- Filter by Status -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Trạng thái</label>
+                                    <select id="statusFilter" class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" title="Lọc theo trạng thái" aria-label="Lọc người dùng theo trạng thái">
+                                        <option value="">Tất cả trạng thái</option>
+                                        <option value="active">Đang hoạt động</option>
+                                        <option value="inactive">Ngừng hoạt động</option>
+                                        <option value="pending">Chờ duyệt</option>
+                                    </select>
+                                </div>
+
+                                <!-- Sort Options -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sắp xếp</label>
+                                    <select id="sortSelect" class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" title="Sắp xếp danh sách" aria-label="Sắp xếp danh sách người dùng">
+                                        <option value="name-asc">Tên A-Z</option>
+                                        <option value="name-desc">Tên Z-A</option>
+                                        <option value="date-desc">Mới nhất</option>
+                                        <option value="date-asc">Cũ nhất</option>
+                                        <option value="id-asc">ID tăng dần</option>
+                                        <option value="id-desc">ID giảm dần</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800">Danh sách người dùng</h3>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500">Hiển thị</span>
+                                    <select id="pageSize" class="px-2 py-1 border border-gray-300 rounded text-sm" title="Số kết quả mỗi trang" aria-label="Chọn số kết quả hiển thị mỗi trang">
+                                        <option value="10">10</option>
+                                        <option value="25" selected>25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <span class="text-sm text-gray-500">kết quả</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <input type="checkbox" id="selectAll" class="rounded border-gray-300 text-admin focus:ring-admin" title="Chọn tất cả" aria-label="Chọn tất cả người dùng">
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Người dùng</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vai trò</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ngày tạo</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody" class="bg-white divide-y divide-gray-200">
+                                    <!-- Users will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="px-6 py-4 border-t border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    Hiển thị <span id="showingStart">1</span> đến <span id="showingEnd">25</span> trong tổng số <span id="totalUsers">1,247</span> kết quả
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button id="prevPage" class="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" title="Trang trước" aria-label="Đi đến trang trước">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <div id="pageNumbers" class="flex items-center space-x-1">
+                                        <!-- Page numbers will be inserted here -->
+                                    </div>
+                                    <button id="nextPage" class="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" title="Trang tiếp" aria-label="Đi đến trang tiếp theo">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add/Edit User Modal -->
+    <div id="userModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-xl max-w-md w-full">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 id="modalTitle" class="text-lg font-semibold text-gray-800">Thêm người dùng mới</h3>
+                        <button id="closeModal" class="text-gray-400 hover:text-gray-600" title="Đóng" aria-label="Đóng modal">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <form id="userForm" class="p-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Họ và tên</label>
+                            <input type="text" id="userName" name="name" required class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" placeholder="Nhập họ và tên">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="userEmail" name="email" required class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" placeholder="Nhập email">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Vai trò</label>
+                            <select id="userRole" name="role" required class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" title="Chọn vai trò người dùng" aria-label="Chọn vai trò cho người dùng">
+                                <option value="">Chọn vai trò</option>
+                                <option value="student">Sinh viên</option>
+                                <option value="teacher">Giảng viên</option>
+                                <option value="admin">Quản trị viên</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Trạng thái</label>
+                            <select id="userStatus" name="status" required class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" title="Chọn trạng thái người dùng" aria-label="Chọn trạng thái cho người dùng">
+                                <option value="active">Đang hoạt động</option>
+                                <option value="inactive">Ngừng hoạt động</option>
+                                <option value="pending">Chờ duyệt</option>
+                            </select>
+                        </div>
+                        
+                        <div id="passwordSection">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mật khẩu</label>
+                            <input type="password" id="userPassword" name="password" class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin focus:border-admin outline-none" placeholder="Nhập mật khẩu">
+                            <p class="text-xs text-gray-500 mt-1">Để trống nếu không muốn thay đổi mật khẩu</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 mt-6">
+                        <button type="button" id="cancelBtn" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-200">
+                            Hủy
+                        </button>
+                        <button type="submit" class="px-4 py-2 text-white bg-admin rounded-lg hover:bg-red-700 transition duration-200">
+                            <span id="submitBtnText">Thêm</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-xl max-w-md w-full">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Xác nhận xóa</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">Bạn có chắc chắn muốn xóa người dùng này? Hành động này không thể hoàn tác.</p>
+                    <div class="flex justify-end space-x-3">
+                        <button id="cancelDelete" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-200">
+                            Hủy
+                        </button>
+                        <button id="confirmDelete" class="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700 transition duration-200">
+                            Xóa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample data for demonstration
+        let users = [
+            { id: 1, name: "Nguyễn Văn An", email: "nguyen.van.an@email.com", role: "student", status: "active", avatar: "NVA", createdAt: "2024-01-15" },
+            { id: 2, name: "Trần Thị Bình", email: "tran.thi.binh@email.com", role: "teacher", status: "active", avatar: "TTB", createdAt: "2024-01-10" },
+            { id: 3, name: "Lê Văn Cường", email: "le.van.cuong@email.com", role: "student", status: "inactive", avatar: "LVC", createdAt: "2024-01-20" },
+            { id: 4, name: "Phạm Thị Dung", email: "pham.thi.dung@email.com", role: "admin", status: "active", avatar: "PTD", createdAt: "2024-01-05" },
+            { id: 5, name: "Hoàng Văn Em", email: "hoang.van.em@email.com", role: "student", status: "pending", avatar: "HVE", createdAt: "2024-01-25" },
+            // Add more sample users...
+            { id: 6, name: "Vũ Thị Phương", email: "vu.thi.phuong@email.com", role: "teacher", status: "active", avatar: "VTP", createdAt: "2024-01-12" },
+            { id: 7, name: "Đỗ Văn Giang", email: "do.van.giang@email.com", role: "student", status: "active", avatar: "DVG", createdAt: "2024-01-18" },
+            { id: 8, name: "Bùi Thị Hoa", email: "bui.thi.hoa@email.com", role: "student", status: "active", avatar: "BTH", createdAt: "2024-01-22" },
+            { id: 9, name: "Ngô Văn Inh", email: "ngo.van.inh@email.com", role: "teacher", status: "inactive", avatar: "NVI", createdAt: "2024-01-08" },
+            { id: 10, name: "Lý Thị Khanh", email: "ly.thi.khanh@email.com", role: "student", status: "active", avatar: "LTK", createdAt: "2024-01-30" }
+        ];
+
+        let filteredUsers = [...users];
+        let currentPage = 1;
+        let pageSize = 25;
+        let editingUserId = null;
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        overlay.addEventListener('click', closeSidebarFn);
+
+        // User dropdown toggle
+        const userMenuToggle = document.getElementById('userMenuToggle');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Active navigation highlighting
+        function setActiveNav() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('bg-admin', 'text-white');
+                link.classList.add('text-gray-700');
+            });
+
+            document.getElementById('nav-users').classList.add('bg-admin', 'text-white');
+            document.getElementById('nav-users').classList.remove('text-gray-700');
+        }
+
+        // Generate avatar from name
+        function generateAvatar(name) {
+            const words = name.split(' ');
+            if (words.length >= 2) {
+                return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+            }
+            return name.substring(0, 2).toUpperCase();
+        }
+
+        // Get role display name
+        function getRoleDisplay(role) {
+            const roleMap = {
+                'student': 'Sinh viên',
+                'teacher': 'Giảng viên',
+                'admin': 'Quản trị viên'
+            };
+            return roleMap[role] || role;
+        }
+
+        // Get status display
+        function getStatusDisplay(status) {
+            const statusMap = {
+                'active': { text: 'Đang hoạt động', class: 'bg-green-100 text-green-800' },
+                'inactive': { text: 'Ngừng hoạt động', class: 'bg-red-100 text-red-800' },
+                'pending': { text: 'Chờ duyệt', class: 'bg-yellow-100 text-yellow-800' }
+            };
+            return statusMap[status] || { text: status, class: 'bg-gray-100 text-gray-800' };
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        // Render users table
+        function renderUsersTable() {
+            const tbody = document.getElementById('usersTableBody');
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const pageUsers = filteredUsers.slice(startIndex, endIndex);
+
+            tbody.innerHTML = pageUsers.map(user => {
+                const status = getStatusDisplay(user.status);
+                return `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="user-checkbox rounded border-gray-300 text-admin focus:ring-admin" data-user-id="${user.id}">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#${user.id}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-3">
+                                    <span class="text-white font-semibold text-sm">${user.avatar || generateAvatar(user.name)}</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">${user.name}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${user.email}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${getRoleDisplay(user.role)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${status.class}">
+                                ${status.text}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatDate(user.createdAt)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex items-center space-x-2">
+                                <button onclick="editUser(${user.id})" class="text-blue-600 hover:text-blue-900" title="Chỉnh sửa">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="deleteUser(${user.id})" class="text-red-600 hover:text-red-900" title="Xóa">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button onclick="toggleUserStatus(${user.id})" class="text-gray-600 hover:text-gray-900" title="${user.status === 'active' ? 'Vô hiệu hóa' : 'Kích hoạt'}">
+                                    <i class="fas ${user.status === 'active' ? 'fa-ban' : 'fa-check-circle'}"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            updatePagination();
+        }
+
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredUsers.length / pageSize);
+            const startIndex = (currentPage - 1) * pageSize + 1;
+            const endIndex = Math.min(currentPage * pageSize, filteredUsers.length);
+
+            document.getElementById('showingStart').textContent = startIndex;
+            document.getElementById('showingEnd').textContent = endIndex;
+            document.getElementById('totalUsers').textContent = filteredUsers.length;
+
+            // Update page numbers
+            const pageNumbers = document.getElementById('pageNumbers');
+            pageNumbers.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.className = `px-3 py-1 text-sm border rounded ${i === currentPage ? 'bg-admin text-white border-admin' : 'border-gray-300 hover:bg-gray-50'}`;
+                    button.onclick = () => changePage(i);
+                    pageNumbers.appendChild(button);
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    const span = document.createElement('span');
+                    span.textContent = '...';
+                    span.className = 'px-2 text-gray-500';
+                    pageNumbers.appendChild(span);
+                }
+            }
+
+            // Update prev/next buttons
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        }
+
+        // Change page
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredUsers.length / pageSize);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderUsersTable();
+            }
+        }
+
+        // Filter and search functions
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const roleFilter = document.getElementById('roleFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const sortOption = document.getElementById('sortSelect').value;
+
+            // Filter users
+            filteredUsers = users.filter(user => {
+                const matchSearch = user.name.toLowerCase().includes(searchTerm) || 
+                                  user.email.toLowerCase().includes(searchTerm);
+                const matchRole = !roleFilter || user.role === roleFilter;
+                const matchStatus = !statusFilter || user.status === statusFilter;
+                
+                return matchSearch && matchRole && matchStatus;
+            });
+
+            // Sort users
+            filteredUsers.sort((a, b) => {
+                switch (sortOption) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'date-desc':
+                        return new Date(b.createdAt) - new Date(a.createdAt);
+                    case 'date-asc':
+                        return new Date(a.createdAt) - new Date(b.createdAt);
+                    case 'id-asc':
+                        return a.id - b.id;
+                    case 'id-desc':
+                        return b.id - a.id;
+                    default:
+                        return 0;
+                }
+            });
+
+            currentPage = 1;
+            renderUsersTable();
+        }
+
+        // Modal functions
+        function openUserModal(isEdit = false, user = null) {
+            const modal = document.getElementById('userModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const submitBtnText = document.getElementById('submitBtnText');
+            const passwordSection = document.getElementById('passwordSection');
+
+            if (isEdit && user) {
+                modalTitle.textContent = 'Chỉnh sửa người dùng';
+                submitBtnText.textContent = 'Cập nhật';
+                passwordSection.querySelector('p').textContent = 'Để trống nếu không muốn thay đổi mật khẩu';
+                
+                document.getElementById('userName').value = user.name;
+                document.getElementById('userEmail').value = user.email;
+                document.getElementById('userRole').value = user.role;
+                document.getElementById('userStatus').value = user.status;
+                document.getElementById('userPassword').required = false;
+                
+                editingUserId = user.id;
+            } else {
+                modalTitle.textContent = 'Thêm người dùng mới';
+                submitBtnText.textContent = 'Thêm';
+                passwordSection.querySelector('p').textContent = 'Mật khẩu phải có ít nhất 6 ký tự';
+                
+                document.getElementById('userForm').reset();
+                document.getElementById('userPassword').required = true;
+                
+                editingUserId = null;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeUserModal() {
+            document.getElementById('userModal').classList.add('hidden');
+            document.getElementById('userForm').reset();
+            editingUserId = null;
+        }
+
+        // User CRUD operations
+        function addUser() {
+            openUserModal(false);
+        }
+
+        function editUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                openUserModal(true, user);
+            }
+        }
+
+        function deleteUser(userId) {
+            const modal = document.getElementById('deleteModal');
+            modal.classList.remove('hidden');
+            
+            document.getElementById('confirmDelete').onclick = () => {
+                users = users.filter(u => u.id !== userId);
+                applyFilters();
+                modal.classList.add('hidden');
+                showNotification('Đã xóa người dùng thành công', 'success');
+            };
+        }
+
+        function toggleUserStatus(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user) {
+                user.status = user.status === 'active' ? 'inactive' : 'active';
+                applyFilters();
+                showNotification(`Đã ${user.status === 'active' ? 'kích hoạt' : 'vô hiệu hóa'} người dùng`, 'success');
+            }
+        }
+
+        // Form submission
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const userData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                role: formData.get('role'),
+                status: formData.get('status'),
+                avatar: generateAvatar(formData.get('name'))
+            };
+
+            if (editingUserId) {
+                // Update existing user
+                const userIndex = users.findIndex(u => u.id === editingUserId);
+                if (userIndex !== -1) {
+                    users[userIndex] = { ...users[userIndex], ...userData };
+                    showNotification('Đã cập nhật thông tin người dùng', 'success');
+                }
+            } else {
+                // Add new user
+                const newUser = {
+                    id: Math.max(...users.map(u => u.id)) + 1,
+                    ...userData,
+                    createdAt: new Date().toISOString().split('T')[0]
+                };
+                users.push(newUser);
+                showNotification('Đã thêm người dùng mới', 'success');
+            }
+
+            closeUserModal();
+            applyFilters();
+        });
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // This is a simple implementation. In a real app, you'd use a proper notification system
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+
+        // Event listeners
+        document.getElementById('addUserBtn').addEventListener('click', addUser);
+        document.getElementById('addUserBtnMain').addEventListener('click', addUser);
+        document.getElementById('closeModal').addEventListener('click', closeUserModal);
+        document.getElementById('cancelBtn').addEventListener('click', closeUserModal);
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            document.getElementById('deleteModal').classList.add('hidden');
+        });
+
+        // Search and filter event listeners
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('globalSearch').addEventListener('input', function() {
+            document.getElementById('searchInput').value = this.value;
+            applyFilters();
+        });
+        document.getElementById('roleFilter').addEventListener('change', applyFilters);
+        document.getElementById('statusFilter').addEventListener('change', applyFilters);
+        document.getElementById('sortSelect').addEventListener('change', applyFilters);
+        document.getElementById('pageSize').addEventListener('change', function() {
+            pageSize = parseInt(this.value);
+            currentPage = 1;
+            renderUsersTable();
+        });
+
+        // Pagination event listeners
+        document.getElementById('prevPage').addEventListener('click', () => changePage(currentPage - 1));
+        document.getElementById('nextPage').addEventListener('click', () => changePage(currentPage + 1));
+
+        // Select all checkbox
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.user-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Export functionality
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            // In a real app, this would export to CSV/Excel
+            showNotification('Đang xuất dữ liệu...', 'info');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNav();
+            renderUsersTable();
+            
+            // Auto-close sidebar on larger screens
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    closeSidebarFn();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
